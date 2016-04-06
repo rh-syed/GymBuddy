@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">GymBuddy</string>
+    <string name="action_settings">Settings</string>
+
+    <!--Registration Form-->
+
+    <string name="RegistrationForm">Register!</string>
+    <string name="FirstName">First Name</string>
+    <string name="LastName">Last Name</string>
+    <string name="Email">E-mail</string>
+    <string name="Password">Password</string>
+    <string name="AgreetoTerms">Agree to terms and conditions</string>
+    <string name="SignUp">Sign Up!</string>
+    <string name="radio_male">Male</string>
+    <string name="radio_female">Female</string>
+    <string name="HomeGym">Home Gym</string>
+    <string-array name="home_gym_array">
+        <item>-----</item>
+        <item>GoodLife</item>
+        <item>YMCA</item>
+        <item>University Gym</item>
+    </string-array>
+    <string name="GymLocation">Home Gym Location</string>
+    <string-array name="goodlife_location">
+        <item>-----</item>
+        <item>Victoria Park Terrace</item>
+        <item>Yonge-Dundas Square</item>
+        <item>Cedarbrae Mall</item>
+    </string-array>
+    <string-array name="YMCA_locations">
+        <item>-----</item>
+        <item>Scarborough Town Centre</item>
+        <item>Central Toronto</item>
+    </string-array>
+    <string-array name="university_locations">
+        <item>-----</item>
+        <item>York University</item>
+        <item>Ryerson University</item>
+        <item>U of T St.George</item>
+    </string-array>
+
+
+
+</resources>
