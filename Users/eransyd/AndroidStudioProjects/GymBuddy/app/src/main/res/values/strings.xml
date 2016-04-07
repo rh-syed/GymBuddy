@@ -21,6 +21,9 @@
         <item>University Gym</item>
     </string-array>
     <string name="GymLocation">Home Gym Location</string>
+    <string-array name ="default_location">
+        <item>Please choose a gym</item>
+    </string-array>
     <string-array name="goodlife_location">
         <item>-----</item>
         <item>Victoria Park Terrace</item>

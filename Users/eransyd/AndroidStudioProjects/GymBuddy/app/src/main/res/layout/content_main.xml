@@ -114,6 +114,11 @@
                 android:inputType="textPersonName" />
 
 
+            <DatePicker
+                android:layout_width="312dp"
+                android:layout_height="62dp"
+                android:id="@+id/datePicker" />
+
             <TextView
 
                 android:id="@+id/textView4"

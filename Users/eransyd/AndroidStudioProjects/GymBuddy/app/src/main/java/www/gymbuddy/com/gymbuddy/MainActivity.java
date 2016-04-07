@@ -14,7 +14,11 @@ import android.widget.AdapterView;
 import android.util.Log;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+
+
 public class MainActivity extends AppCompatActivity {
+
+public String selection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,57 +36,67 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Spinner staticSpinner = (Spinner) findViewById(R.id.gymType_spinner);
-        Spinner dynamicSpinner = (Spinner) findViewById(R.id.gymLocation_spinner);
+
+        //HOME GYM TYPE
+        Spinner homeGymSpinner = (Spinner) findViewById(R.id.gymType_spinner);
+        ArrayAdapter<CharSequence> homeGymAdapter = ArrayAdapter.createFromResource(this, R.array.home_gym_array, android.R.layout.simple_spinner_item);
+        homeGymAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        homeGymSpinner.setAdapter(homeGymAdapter);
+        homeGymSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener());
 
 
+        //HOME GYM LOCATION
+        Spinner homeGymLocationSpinner = (Spinner) findViewById(R.id.gymLocation_spinner);
+        //ArrayAdapter<CharSequence> homeGymLocationAdapter = ArrayAdapter.createFromResource(this, R.array.default_location, android.R.layout.simple_spinner_item);
+       // homeGymLocationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //homeGymLocationSpinner.setAdapter(homeGymAdapter);
+        //homeGymLocationSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener());
 
-        // Create an ArrayAdapter using the string array and a default spinner
-        ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter
-                .createFromResource(this, R.array.home_gym_array,
-                        android.R.layout.simple_spinner_item);
+    }
 
-        // Specify the layout to use when the list of choices appears
-        staticAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    public class MyOnItemSelectedListener implements OnItemSelectedListener{
 
-        staticSpinner.setAdapter(staticAdapter);
 
-        String selection = staticSpinner.getSelectedItem().toString();
-
-        if (selection == "GoodLife")
+        public void onItemSelected(AdapterView<?> parent, View v, int pos,long id)
         {
-            ArrayAdapter<CharSequence>  dynamicAdapter  = ArrayAdapter
-                    .createFromResource(this, R.array.goodlife_location,
-                            android.R.layout.simple_spinner_item);
+            Spinner homeGymSpinner = (Spinner) findViewById(R.id.gymType_spinner);
 
-            dynamicAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            //setting spinner2 based on spinner1
+            String gymSelection= String.valueOf(homeGymSpinner.getSelectedItem());
 
-            dynamicSpinner.setAdapter(dynamicAdapter);
+            if(gymSelection.contentEquals("GoodLife")) {
 
+                Spinner homeGymLocationSpinner = (Spinner) findViewById(R.id.gymLocation_spinner);
+                ArrayAdapter<CharSequence> homeGymLocationAdapter = ArrayAdapter.createFromResource(MainActivity.this,
+                        R.array.goodlife_location, android.R.layout.simple_spinner_item);
+                homeGymLocationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                homeGymLocationAdapter.notifyDataSetChanged();
+                homeGymLocationSpinner.setAdapter(homeGymLocationAdapter);
+
+            }
+            else if(gymSelection.contentEquals("YMCA")) {
+                Spinner homeGymLocationSpinner = (Spinner) findViewById(R.id.gymLocation_spinner);
+                ArrayAdapter<CharSequence> homeGymLocationAdapter = ArrayAdapter.createFromResource(MainActivity.this,
+                        R.array.YMCA_locations, android.R.layout.simple_spinner_item);
+                homeGymLocationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                homeGymLocationAdapter.notifyDataSetChanged();
+                homeGymLocationSpinner.setAdapter(homeGymLocationAdapter);
+            }
+            else if(gymSelection.contentEquals("University Gym")) {
+                Spinner homeGymLocationSpinner = (Spinner) findViewById(R.id.gymLocation_spinner);
+                ArrayAdapter<CharSequence> homeGymLocationAdapter = ArrayAdapter.createFromResource(MainActivity.this,
+                        R.array.university_locations, android.R.layout.simple_spinner_item);
+                homeGymLocationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                homeGymLocationAdapter.notifyDataSetChanged();
+                homeGymLocationSpinner.setAdapter(homeGymLocationAdapter);
+            }
 
         }
-        else if (selection == "YMCA")
-        {
-            ArrayAdapter<CharSequence>  dynamicAdapter  = ArrayAdapter
-                    .createFromResource(this, R.array.YMCA_locations,
-                            android.R.layout.simple_spinner_item);
 
-            dynamicAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-            dynamicSpinner.setAdapter(dynamicAdapter);
+        public void onNothingSelected(AdapterView<?> arg0) {
+            // TODO Auto-generated method stub
 
         }
-        else if (selection == "University")
-        {
-            ArrayAdapter<CharSequence>  dynamicAdapter  = ArrayAdapter
-                    .createFromResource(this, R.array.university_locations,
-                            android.R.layout.simple_spinner_item);
-            dynamicAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-            dynamicSpinner.setAdapter(dynamicAdapter);
-
-        }
-        else {};
 
     }
 
