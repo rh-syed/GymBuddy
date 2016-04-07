@@ -39,7 +39,7 @@
 
             <TextView
 
-                android:id="@+id/textView1"
+                android:id="@+id/registrationHeader"
 
                 android:layout_width="wrap_content"
 
@@ -55,7 +55,7 @@
 
             <TextView
 
-                android:id="@+id/textView2"
+                android:id="@+id/firstName"
 
                 android:layout_width="wrap_content"
 
@@ -69,7 +69,7 @@
 
             <EditText
 
-                android:id="@+id/editText1"
+                android:id="@+id/editFirstName"
 
                 android:layout_width="match_parent"
 
@@ -79,17 +79,13 @@
 
                 android:inputType="textPersonName" >
 
-
-
-                <requestFocus />
-
             </EditText>
 
 
 
             <TextView
 
-                android:id="@+id/textView3"
+                android:id="@+id/lastName"
 
                 android:layout_width="wrap_content"
 
@@ -100,10 +96,9 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
-
             <EditText
 
-                android:id="@+id/editText2"
+                android:id="@+id/editLastName"
 
                 android:layout_width="match_parent"
 
@@ -114,14 +109,30 @@
                 android:inputType="textPersonName" />
 
 
-            <DatePicker
-                android:layout_width="312dp"
-                android:layout_height="62dp"
-                android:id="@+id/datePicker" />
+            <TextView
+
+                android:id="@+id/dob"
+
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+
+                android:text="@string/dob"
+
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+            <EditText
+                android:id="@+id/dobPicker"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:hint="@string/dobPicker" />
+
 
             <TextView
 
-                android:id="@+id/textView4"
+                android:id="@+id/email"
 
                 android:layout_width="wrap_content"
 
@@ -135,7 +146,7 @@
 
             <EditText
 
-                android:id="@+id/editText3"
+                android:id="@+id/editEmail"
 
                 android:layout_width="match_parent"
 
@@ -149,7 +160,7 @@
 
             <TextView
 
-                android:id="@+id/textView5"
+                android:id="@+id/password"
 
                 android:layout_width="wrap_content"
 
@@ -163,7 +174,7 @@
 
             <EditText
 
-                android:id="@+id/editText4"
+                android:id="@+id/editPassword"
 
                 android:layout_width="match_parent"
 
@@ -198,7 +209,7 @@
 
             <TextView
 
-                android:id="@+id/textView6"
+                android:id="@+id/homeGym"
 
                 android:layout_width="wrap_content"
 
@@ -218,7 +229,7 @@
 
             <TextView
 
-                android:id="@+id/textView7"
+                android:id="@+id/gymLocation"
 
                 android:layout_width="wrap_content"
 
@@ -238,7 +249,7 @@
 
             <CheckBox
 
-                android:id="@+id/checkBox1"
+                android:id="@+id/consent"
 
                 android:layout_width="wrap_content"
 
@@ -255,7 +266,7 @@
 
             <Button
 
-                android:id="@+id/button1"
+                android:id="@+id/signup"
 
                 android:layout_width="wrap_content"
 

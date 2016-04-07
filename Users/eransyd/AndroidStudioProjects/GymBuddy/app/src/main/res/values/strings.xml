@@ -13,6 +13,7 @@
     <string name="SignUp">Sign Up!</string>
     <string name="radio_male">Male</string>
     <string name="radio_female">Female</string>
+
     <string name="HomeGym">Home Gym</string>
     <string-array name="home_gym_array">
         <item>-----</item>
@@ -20,6 +21,7 @@
         <item>YMCA</item>
         <item>University Gym</item>
     </string-array>
+
     <string name="GymLocation">Home Gym Location</string>
     <string-array name ="default_location">
         <item>Please choose a gym</item>
@@ -41,6 +43,11 @@
         <item>Ryerson University</item>
         <item>U of T St.George</item>
     </string-array>
+
+    <string name="dob">Date of Birth</string>
+    <string name="dobPicker">DD/MM/YYYY</string>
+
+
 
 
 

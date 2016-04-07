@@ -13,12 +13,22 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.util.Log;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.app.DatePickerDialog;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+import android.text.InputType;
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-public String selection;
+private EditText dobPicker;
+private DatePickerDialog dobPickerDialog;
+private SimpleDateFormat dateFormatter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +47,7 @@ public String selection;
         });
 
 
-        //HOME GYM TYPE
+        //HOME GYM TYPE SPINNERS
         Spinner homeGymSpinner = (Spinner) findViewById(R.id.gymType_spinner);
         ArrayAdapter<CharSequence> homeGymAdapter = ArrayAdapter.createFromResource(this, R.array.home_gym_array, android.R.layout.simple_spinner_item);
         homeGymAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -47,13 +57,49 @@ public String selection;
 
         //HOME GYM LOCATION
         Spinner homeGymLocationSpinner = (Spinner) findViewById(R.id.gymLocation_spinner);
-        //ArrayAdapter<CharSequence> homeGymLocationAdapter = ArrayAdapter.createFromResource(this, R.array.default_location, android.R.layout.simple_spinner_item);
-       // homeGymLocationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //homeGymLocationSpinner.setAdapter(homeGymAdapter);
-        //homeGymLocationSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener());
+
+
+
+        /***DATE OF BIRTH PICKER**/
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+
+        findViewsById();
+
+        setDateTimeField();
 
     }
 
+    private void findViewsById() {
+        dobPicker = (EditText) findViewById(R.id.dobPicker);
+        dobPicker.setInputType(InputType.TYPE_NULL);
+        dobPicker.requestFocus();
+    }
+
+    private void setDateTimeField() {
+        dobPicker.setOnClickListener(this);
+
+
+        Calendar newCalendar = Calendar.getInstance();
+        dobPickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                dobPicker.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == dobPicker) {
+            dobPickerDialog.show();
+        }
+    }
+
+    /**CLASS CONTAINING THE LISTENERS FOR SPINNERS**/
     public class MyOnItemSelectedListener implements OnItemSelectedListener{
 
 
