@@ -1,26 +1,27 @@
 package www.gymbuddy.com.gymbuddy;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Spinner;
-import android.widget.ArrayAdapter;
+import android.view.View;
 import android.widget.AdapterView;
-import android.util.Log;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.app.DatePickerDialog;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-
-import android.text.InputType;
 
 
 
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 private EditText dobPicker;
 private DatePickerDialog dobPickerDialog;
 private SimpleDateFormat dateFormatter;
+    public String HOME_GYM;
+    public String HOME_GYM_LOCATION;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +69,45 @@ private SimpleDateFormat dateFormatter;
         findViewsById();
 
         setDateTimeField();
+
+        //***DATABASE****//
+
+
+
+
+
+        Button button= (Button) findViewById(R.id.signup);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                EditText firstName = (EditText) findViewById(R.id.editFirstName);
+                EditText lastName = (EditText) findViewById(R.id.editLastName);
+                EditText birthDate = (EditText) findViewById(R.id.dobPicker);
+                RadioGroup genderGroup = (RadioGroup) findViewById(R.id.radioSex);
+                int genderId = genderGroup.getCheckedRadioButtonId();
+                RadioButton genderRadio = (RadioButton) findViewById(genderId);
+                EditText email = (EditText) findViewById(R.id.editEmail);
+                EditText password = (EditText) findViewById(R.id.editPassword);
+                EditText phoneNo = (EditText) findViewById(R.id.phoneNoEdit);
+
+
+                String firstNameValue = firstName.getText().toString();
+                String lastNameValue = lastName.getText().toString();
+                String birthDateValue = birthDate.getText().toString();
+                String genderValue = genderRadio.getText().toString();
+                String emailValue = email.getText().toString();
+                String passwordValue = password.getText().toString();
+                String  phoneNoValue = phoneNo.getText().toString();
+
+                MyDatabaseHelper databaseHelper = new MyDatabaseHelper(MainActivity.this);
+
+                databaseHelper.addUser(firstNameValue,lastNameValue, birthDateValue,genderValue, emailValue,passwordValue,phoneNoValue,
+                                           HOME_GYM, HOME_GYM_LOCATION );
+            }
+        });
+
+        MyDatabaseHelper databaseHelper = new MyDatabaseHelper(this);
+
 
     }
 
@@ -110,6 +152,8 @@ private SimpleDateFormat dateFormatter;
             //setting spinner2 based on spinner1
             String gymSelection= String.valueOf(homeGymSpinner.getSelectedItem());
 
+            HOME_GYM = gymSelection;
+
             if(gymSelection.contentEquals("GoodLife")) {
 
                 Spinner homeGymLocationSpinner = (Spinner) findViewById(R.id.gymLocation_spinner);
@@ -136,6 +180,12 @@ private SimpleDateFormat dateFormatter;
                 homeGymLocationAdapter.notifyDataSetChanged();
                 homeGymLocationSpinner.setAdapter(homeGymLocationAdapter);
             }
+            else {}
+
+            Spinner homeGymLocationSpinner = (Spinner) findViewById(R.id.gymLocation_spinner);
+            String gymLocationSelection= String.valueOf(homeGymLocationSpinner.getSelectedItem());
+            HOME_GYM_LOCATION = gymLocationSelection;
+
 
         }
 

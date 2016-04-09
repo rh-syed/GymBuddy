@@ -127,7 +127,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
+                android:ems="10"
                 android:hint="@string/dobPicker" />
+
+            <RadioGroup
+                android:id="@+id/radioSex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:ems="10">
+
+                <RadioButton
+                    android:id="@+id/radioMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radio_male"
+                    android:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/radioFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radio_female"
+                    android:checked="true" />
+
+            </RadioGroup>
 
 
             <TextView
@@ -184,28 +208,25 @@
 
                 android:inputType="textPassword" />
 
+            <TextView
 
-            <RadioGroup
-                android:id="@+id/radioSex"
+                android:id="@+id/phoneNo"
+
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+
+                android:text="@string/phone"
+
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/radioMale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/radio_male"
-                    android:checked="true" />
-
-                <RadioButton
-                    android:id="@+id/radioFemale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/radio_female"
-                    android:checked="true" />
-
-            </RadioGroup>
+                android:inputType="phone"
+                android:ems="10"
+                android:id="@+id/phoneNoEdit" />
 
             <TextView
 

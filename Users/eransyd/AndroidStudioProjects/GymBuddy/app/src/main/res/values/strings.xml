@@ -46,6 +46,7 @@
 
     <string name="dob">Date of Birth</string>
     <string name="dobPicker">DD/MM/YYYY</string>
+    <string name="phone">Phone Number</string>
 
 
 
