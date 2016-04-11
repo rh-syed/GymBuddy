@@ -1,6 +1,7 @@
 package www.gymbuddy.com.gymbuddy;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,6 +20,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -40,16 +43,6 @@ private SimpleDateFormat dateFormatter;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-
         //HOME GYM TYPE SPINNERS
         Spinner homeGymSpinner = (Spinner) findViewById(R.id.gymType_spinner);
         ArrayAdapter<CharSequence> homeGymAdapter = ArrayAdapter.createFromResource(this, R.array.home_gym_array, android.R.layout.simple_spinner_item);
@@ -59,7 +52,8 @@ private SimpleDateFormat dateFormatter;
 
 
         //HOME GYM LOCATION
-        Spinner homeGymLocationSpinner = (Spinner) findViewById(R.id.gymLocation_spinner);
+        //Spinner homeGymLocationSpinner = (Spinner) findViewById(R.id.gymLocation_spinner);
+        //homeGymLocationSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener());
 
 
 
@@ -106,7 +100,7 @@ private SimpleDateFormat dateFormatter;
             }
         });
 
-        MyDatabaseHelper databaseHelper = new MyDatabaseHelper(this);
+
 
 
     }
@@ -151,40 +145,98 @@ private SimpleDateFormat dateFormatter;
 
             //setting spinner2 based on spinner1
             String gymSelection= String.valueOf(homeGymSpinner.getSelectedItem());
-
             HOME_GYM = gymSelection;
+
+
+            Spinner homeGymLocationSpinner = (Spinner) findViewById(R.id.gymLocation_spinner);
 
             if(gymSelection.contentEquals("GoodLife")) {
 
-                Spinner homeGymLocationSpinner = (Spinner) findViewById(R.id.gymLocation_spinner);
                 ArrayAdapter<CharSequence> homeGymLocationAdapter = ArrayAdapter.createFromResource(MainActivity.this,
                         R.array.goodlife_location, android.R.layout.simple_spinner_item);
                 homeGymLocationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 homeGymLocationAdapter.notifyDataSetChanged();
                 homeGymLocationSpinner.setAdapter(homeGymLocationAdapter);
+                homeGymLocationSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view,
+                                               int position, long id) {
+                        Spinner homeGymLocationSpinner = (Spinner) findViewById(R.id.gymLocation_spinner);
+                        String gymLocationSelection= String.valueOf(homeGymLocationSpinner.getSelectedItem());
+                        HOME_GYM_LOCATION = gymLocationSelection;
+                    }
 
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+
+                });
             }
             else if(gymSelection.contentEquals("YMCA")) {
-                Spinner homeGymLocationSpinner = (Spinner) findViewById(R.id.gymLocation_spinner);
+
                 ArrayAdapter<CharSequence> homeGymLocationAdapter = ArrayAdapter.createFromResource(MainActivity.this,
                         R.array.YMCA_locations, android.R.layout.simple_spinner_item);
                 homeGymLocationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 homeGymLocationAdapter.notifyDataSetChanged();
                 homeGymLocationSpinner.setAdapter(homeGymLocationAdapter);
+                homeGymLocationSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view,
+                                               int position, long id) {
+                        Spinner homeGymLocationSpinner = (Spinner) findViewById(R.id.gymLocation_spinner);
+                        String gymLocationSelection= String.valueOf(homeGymLocationSpinner.getSelectedItem());
+                        HOME_GYM_LOCATION = gymLocationSelection;
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+
+                });
+
+
             }
             else if(gymSelection.contentEquals("University Gym")) {
-                Spinner homeGymLocationSpinner = (Spinner) findViewById(R.id.gymLocation_spinner);
+
                 ArrayAdapter<CharSequence> homeGymLocationAdapter = ArrayAdapter.createFromResource(MainActivity.this,
                         R.array.university_locations, android.R.layout.simple_spinner_item);
                 homeGymLocationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 homeGymLocationAdapter.notifyDataSetChanged();
                 homeGymLocationSpinner.setAdapter(homeGymLocationAdapter);
-            }
-            else {}
+                homeGymLocationSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view,
+                                               int position, long id) {
+                        Spinner homeGymLocationSpinner = (Spinner) findViewById(R.id.gymLocation_spinner);
+                        String gymLocationSelection= String.valueOf(homeGymLocationSpinner.getSelectedItem());
+                        HOME_GYM_LOCATION = gymLocationSelection;
+                    }
 
-            Spinner homeGymLocationSpinner = (Spinner) findViewById(R.id.gymLocation_spinner);
-            String gymLocationSelection= String.valueOf(homeGymLocationSpinner.getSelectedItem());
-            HOME_GYM_LOCATION = gymLocationSelection;
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+
+                });
+
+
+            }
+            else {
+                Context context = getApplicationContext();
+                CharSequence text = "Please select your Gym!";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+            }
+
+
+
+
+
 
 
         }
