@@ -22,10 +22,13 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
-
+import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -40,6 +43,7 @@ private SimpleDateFormat dateFormatter;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Firebase.setAndroidContext(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -83,6 +87,7 @@ private SimpleDateFormat dateFormatter;
                 EditText email = (EditText) findViewById(R.id.editEmail);
                 EditText password = (EditText) findViewById(R.id.editPassword);
                 EditText phoneNo = (EditText) findViewById(R.id.phoneNoEdit);
+                EditText userName = (EditText) findViewById(R.id.editUserName);
 
 
                 String firstNameValue = firstName.getText().toString();
@@ -92,11 +97,44 @@ private SimpleDateFormat dateFormatter;
                 String emailValue = email.getText().toString();
                 String passwordValue = password.getText().toString();
                 String  phoneNoValue = phoneNo.getText().toString();
+                String userNameValue = userName.getText().toString();
 
-                MyDatabaseHelper databaseHelper = new MyDatabaseHelper(MainActivity.this);
+                Firebase ref = new Firebase("https://flickering-torch-8392.firebaseio.com/GymBuddy");
 
-                databaseHelper.addUser(firstNameValue,lastNameValue, birthDateValue,genderValue, emailValue,passwordValue,phoneNoValue,
-                                           HOME_GYM, HOME_GYM_LOCATION );
+                Firebase userRef = ref.child("users").child(userNameValue);
+
+
+                userRef.child("firstName").setValue(firstNameValue);
+                userRef.child("lastName").setValue(lastNameValue);
+                userRef.child("dob").setValue(birthDateValue);
+                userRef.child("gender").setValue(genderValue);
+                userRef.child("email").setValue(emailValue);
+                userRef.child("password").setValue(passwordValue);
+                userRef.child("phoneNumber").setValue(phoneNoValue);
+                userRef.child("homeGym").setValue(HOME_GYM);
+                userRef.child("homeGymLocation").setValue(HOME_GYM_LOCATION);
+
+
+
+                /*
+                Map<String, String> usersMap = new HashMap<String, String>();
+                usersMap.put("firstName", firstNameValue);
+                usersMap.put("lastName", lastNameValue);
+                usersMap.put("dob", birthDateValue);
+                usersMap.put("gender", genderValue);
+                usersMap.put("userName", userNameValue);
+                usersMap.put("email", emailValue);
+                usersMap.put("password", passwordValue);
+                usersMap.put("phoneNumber", firstNameValue);
+                usersMap.put("lastName", phoneNoValue);
+                usersMap.put("homeGym", HOME_GYM);
+                usersMap.put("homeGymLocation", HOME_GYM_LOCATION);
+
+
+                Map<String, Map<String, String>> users = new HashMap<String, Map<String, String>>();
+                users.put(userNameValue, usersMap);
+                userRef.setValue(users);
+                */
             }
         });
 
